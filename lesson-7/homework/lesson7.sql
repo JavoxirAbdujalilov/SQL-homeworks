@@ -16,8 +16,8 @@ group by customerID
 select departmentName, COUNT(*) from employees
 group by departmentName 
 having COUNT(employeeID)>5
---- 11 savol join qo`shilgan select SUM(saleamount) as totalsales, AVG(saleamount) as avaragesales from sales
---- group by ProductID
+select  ProductID, SUM(Saleamount) as sumamount, AVG(Saleamount) as avgamount from Sales
+GROUP by ProductID
 select COUNT(*) from employees 
 where departmentName='HR'
 select departmentname, MIN(salary) minsalary, MAX(salary) maxsalary from employees
@@ -47,6 +47,15 @@ having SUM(saleamount)> 1500
  group by departmentName
  having AVG(salary)> 65000
  select * from TSQL2012.Sales.Orders
--- 11.23.24.25 qoldi
+SELECT * FROM TSQL2012.Sales.Orders
+SELECT CUSTid, SUM(IIF(FREIGHT>50,FREIGHT,0)) AS OVER_50, MIN(FREIGHT) AS MINAMOUNT FROM TSQL2012.Sales.Orders
+GROUP BY custid
+ SELECT CustID,SUM( CASE 
+ WHEN FREIGHT> 50 THEN FREIGHT ELSE 0 END) AS OVER_50, MIN(FREIGHT) AS MINFREIGHT FROM TSQL2012.SALES.ORDERS
+ GROUP BY custid
+ SELECT YEAR(ORDERDATE), MONTH(ORDERDATE),SUM(TOTALAMOUNT), COUNT(DISTINCT PRODUCTID) FROM Orders
+ GROUP BY YEAR(ORDERDATE), MONTH(ORDERDATE)
+ HAVING COUNT(ProductID)>=2
+ SELECT YEAR(ORDERDATE), MIN(QUANTITY), MAX(QUANTITY) FROM Orders GROUP BY YEAR(ORDERDATE)
 
 
