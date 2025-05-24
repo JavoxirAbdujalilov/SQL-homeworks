@@ -68,3 +68,21 @@ FOR DISTRICT_NAME IN ([BEKTEMIR],[CHILONZOR],[YAKKASAROY])) AS POPULATION_EACH_C
 SELECT TOP 3  TotalAmount AS TOTALSPENT, CUSTOMERID  FROM INVOICES
 ORDER BY TOTALSPENT DESC
 --20. Transform Population_Each_Year table to its original format (City_Population).
+
+select district_name, 2012,2013 from population_each_year
+ as Newtable
+unpivot
+( population for year in ([2012],[2013],[2014],[2015])) As unpivotdata
+
+--21. Using Products and Sales tables, list product names and the number of times each has been sold. (Research for Joins)
+SELECT P.ProductName, COUNT(S.SaleID) AS TimesSold
+FROM Products P
+JOIN Sales S ON P.ProductID = S.ProductID
+GROUP BY P.ProductName;
+--22. Transform Population_Each_City table to its original format (City_Population).
+SELECT Year, City, Population
+FROM Population_Each_City
+UNPIVOT (Population FOR City IN ([Bektemir], [Chilonzor], [Yakkasaroy])) AS UnpivotedData;
+
+
+
