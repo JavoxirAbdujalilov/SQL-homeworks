@@ -1,15 +1,3 @@
-select * from Products 
-select * from departments
-select * from Suppliers
-select * from employees
-select * from orders
-select * from customers
-select* from students 
-select * from Courses
-select * from Enrollments
-select * from payments
-Select * from sales
-select * from categories
 --Easy (10 puzzles)
 --1. Using Products, Suppliers table List all combinations of product names and supplier names.
 select ProductName, SupplierName from products, suppliers
@@ -36,7 +24,8 @@ select Name, enrollmentID from students inner join Enrollments on students.stude
 --9. Using Payments, Orders table List all orders that have matching payments.
 select Orders.OrderID, paymentID from Orders inner join Payments on orders.orderid=payments.orderiD
 --10. Using Orders, Products table Show orders where product price is more than 100.
-Select orderID, Productname, price from Orders left join Products on orders.ProductId=products.productID and Price>100
+Select orderID, Productname, price from Orders inner join Products on orders.ProductId=products.productID 
+  where Price>100
 --🟡 Medium (10 puzzles)
 --11. Using Employees, Departments table List employee names and department names where department IDs are not equal. It means: Show all mismatched employee-department combinations.
 select name, DepartmentName from Employees 
@@ -84,7 +73,7 @@ where price*quantity<> Amount
 --23. Using Students, Enrollments, Courses table Find students who are not enrolled in any course.
 select S.Studentid from Students S
 left join  enrollments EN on S.studentID=En.StudentID
-where S.StudentID is null
+where En.EnrollmentID is null
 --24. Using Employees table List employees who are managers of someone, but their salary is less than or equal to the person they manage.
 select E1.Name as employees, E2.Name as Manager, E1.salary as EmployeeSalary, E2.Salary as ManagerSalary from Employees as E1 inner join employees as E2 on E1.employeeID=E2.ManagerID
 where E1.Salary>=E2.SAlary
